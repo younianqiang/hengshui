@@ -1,0 +1,21 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口
+  port: 8088
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.das.springboot.hengshui.domain 
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath:mybatis/mapper/**/*.xml 
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml 
+
+# 数据库连接  
+spring:
+  datasource:
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.2.65:1521/hengshui # 10.33.33.2
+    username: jcyl
+    password: juyaPassw0d
