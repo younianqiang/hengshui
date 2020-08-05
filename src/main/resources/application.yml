@@ -16,6 +16,6 @@ mybatis:
 spring:
   datasource:
     driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@192.168.2.65:1521/hengshui # 10.33.33.2
-    username: jcyl
-    password: juyaPassw0d
+    url: jdbc:oracle:thin:@ip:端口/实例名 
+    username: 用户
+    password: 密码
