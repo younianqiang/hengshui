@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.springboot.hengshui.mapper.app.AppMapper">
+	<resultMap id="BaseResultMap" type="com.das.springboot.hengshui.domain.PersonalInfo">
+		<result column="ORG_CODE" property="orgcode" />
+		<!-- empi address  idadress medicalpaytype -->
+		<result column="NAME" property="patientname" /> 
+		<result column="ID_TYPE_CODE" property="idcardtype" />
+		<result column="ID_NO" property="iccardno" />
+		<result column="SEX_CODE" property="sex" />
+		<result column="BIRTH_DATE" property="birthdate" />
+		<result column="TEL_NO" property="phone" />
+		<result column="NATIONALITY_CODE" property="nation" />
+		<result column="MARRIAGE_CODE" property="marriage" />
+		<result column="EDUCATION_CODE" property="education" />
+		<result column="RESIDENCE_MARK" property="Livetype" />
+		<result column="OCCUPATION_CODE" property="work" />
+		<result column="EMPLOYER_NAME" property="job" />
+		<result column="ABO_CODE" property="ABO" />
+		<result column="RH_CODE" property="RH" />
+		<result column="CONTACT_NAME" property="familyname" />
+		<result column="CONTACT_TEL_NO" property="familytelephone" />
+	</resultMap>		
+				
+	<!-- 查询个人信息 -->			
+	<select id="HPS_PersonalInformation" parameterType="String" resultMap="BaseResultMap">
+		select 
+			ORG_CODE,NAME,ID_TYPE_CODE,ID_NO,SEX_CODE,BIRTH_DATE,TEL_NO,NATIONALITY_CODE,MARRIAGE_CODE,
+			RESIDENCE_MARK,OCCUPATION_CODE,EDUCATION_CODE,EMPLOYER_NAME,ABO_CODE,RH_CODE,CONTACT_NAME,CONTACT_TEL_NO
+		from BASEINFO  
+		where 
+			ORG_CODE = #{orgcode,jdbcType=VARCHAR}
+		and ID_NO = #{iccardno,jdbcType=VARCHAR}
+		and ID_TYPE_CODE = '01'
+	</select>
+	
+</mapper>
