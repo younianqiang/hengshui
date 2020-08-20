@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.app.HPS_takeNoMapper">
+	<!-- 定义缓存 一般是一级缓存，如果用同一个sqlsession 那么相同查询直接会从缓存中查找 <cache size="1024" flushInterval="60000" 
+		eviction="LRU" readOnly="false"></cache> -->
+
+	<!-- 患者报到/取号 -->
+	<select id="findAPIHPS" resultType="com.das.consultation.entity.app.HPS_takeNoInfo"
+		parameterType="String">
+		<!-- select t.queueno as queueno, t.queuenum as queuenum , t.mzlsh as mzlsh, 
+			t.qhfph as qhfph from XXXXX t where t.orgcode = #{orgcode,jdbcType=VARCHAR} and t.orderid 
+			= #{orderid,jdbcType=VARCHAR} <if test="orderno!= null and orderno!=''">and t.payno = #{payno,jdbcType=VARCHAR}</if> 
+			<if test="deptid!= null and deptid!=''">and t.payamout = #{payamout,jdbcType=VARCHAR}</if> 
+			<if test="truename!= null and truename!=''">and t.paymethod = #{paymethod,jdbcType=VARCHAR}</if> 
+			<if test="cardno!= null and cardno!=''">and t.paychannel = #{paychannel,jdbcType=VARCHAR}</if> 
+			<if test="cardtype!= null and cardtype!=''">and t.paychannel = #{paychannel,jdbcType=VARCHAR}</if> -->
+
+		select
+		t.health_record_id as queueno,
+		t.name as queuenum,
+		t.health_record_no as mzlsh,
+		t.patientinfo_040 as qhfph
+		from
+		PATIENTINFO
+		t where t.health_record_id = #{orgcode,jdbcType=VARCHAR}
+	</select>
+	<update id="insertAPIHPS" parameterType="com.das.consultation.entity.app.HPS_takeNoInfo">
+		update XXXX
+		set
+		orgcode=#{orgcode,jdbcType=VARCHAR}
+		<if test="orderno !=null and orderno !=''">,orderno= #{orderno,jdbcType=VARCHAR}    </if>
+		<if test="deptid  !=null and deptid  !=''">,deptid = #{deptid,jdbcType=VARCHAR}     </if>
+		<if test="truename!=null and truename!=''">,truename=#{truename,jdbcType=VARCHAR}   </if>
+		<if test="cardno  !=null and cardno  !=''">,cardno = #{cardno,jdbcType=VARCHAR}     </if>
+		<if test="cardtype!=null and cardtype!=''">,cardtype = #{cardtype,jdbcType=VARCHAR} </if>
+		<if test="queueno !=null and queueno !=''">,queueno =#{queueno,jdbcType=VARCHAR}    </if>
+		<if test="queuenum!=null and queuenum!=''">,queuenum = #{queuenum,jdbcType=VARCHAR} </if>
+		<if test="mzlsh	!=null and mzlsh	!=''"> ,mzlsh = #{mzlsh,jdbcType=VARCHAR}       </if>
+		<if test="qhfph	!=null and qhfph	!=''"> ,qhfph = #{qhfph,jdbcType=VARCHAR}       </if>
+		where orgcode=#{orgcode,jdbcType=VARCHAR} and yuyueid = #{yuyueid,jdbcType=VARCHAR}
+	</update>
+	<!-- //orgcode 医疗机构代码 STRING 是 医疗机构的代码 //yuyueid 预约订单id STRING 是 //orderno 
+		订单号 STRING 否 //deptid 科室id STRING 否 //truename 姓名 STRING 否 //cardno 卡号 STRING 
+		否 //cardtype 卡类型 STRING 否 参照值域字典 //queueno 排队号 INT 是 //queuenum 排队人数 INT 
+		否 //mzlsh 门诊流水号 STRING 否 //qhfph 取号发票号 STRING 否 -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+     
+     
+
+
+
+
+
+
+
+        
+        
+
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.app.HPS_queryPayInfoMapper">
+	<!-- 定义缓存 一般是一级缓存，如果用同一个sqlsession 那么相同查询直接会从缓存中查找 <cache size="1024" flushInterval="60000" 
+		eviction="LRU" readOnly="false"></cache> -->
+
+	<!-- 查询支付单据 -->
+	<select id="findAPIHPS" resultType="com.das.consultation.entity.app.HPS_queryPayInfoInfo"
+		parameterType="String">
+		<!-- select t.payinfo as payinfo ,t.hispayorderno as hispayorderno ,t.hispaytotalamt 
+			as hispaytotalamt ,t.mzlsh as mzlsh ,t.hispayno as hispayno ,t.hispayamt 
+			as hispayamt ,t.selfpayamt as selfpayamt ,t.socialpayamt as socialpayamt 
+			,t.paytype as paytype ,t.paystate as paystate ,t.creattime as creattime ,t.depname 
+			as depname ,t.doctorname as doctorname ,t.mztype as mztype ,t.detail as detail 
+			,t.itemcodehis as itemcodehis ,t.itemcodeyb as itemcodeyb ,t.itemname as 
+			itemname ,t.std as std ,t.amt as amt ,t.unit as unit ,t.price as price ,t.detailpayamt 
+			as detailpayamt from XXXXX t where t.orgcode = #{orgcode,jdbcType=VARCHAR} and t.cardtype 
+			= #{cardtype,jdbcType=VARCHAR} and t.cardno = #{cardno,jdbcType=VARCHAR} -->
+		select
+		t.name as payinfo
+		,t.patientinfo_001 as hispayorderno
+		,t.patientinfo_002 as hispaytotalamt
+		,t.patientinfo_003 as mzlsh
+		,t.patientinfo_004 as hispayno
+		,t.patientinfo_005 as hispayamt
+		,t.patientinfo_006 as selfpayamt
+		,t.patientinfo_007 as socialpayamt
+		,t.patientinfo_008 as paytype
+		,t.patientinfo_009 as paystate
+		,t.patientinfo_010 as creattime
+		,t.patientinfo_011 as depname
+		,t.patientinfo_012 as doctorname
+		,t.patientinfo_013 as mztype
+		,t.patientinfo_014 as detail
+		,t.patientinfo_015 as itemcodehis
+		,t.patientinfo_030 as itemcodeyb
+		,t.patientinfo_016 as itemname
+		,t.patientinfo_017 as std
+		,t.patientinfo_018 as amt
+		,t.patientinfo_019 as unit
+		,t.patientinfo_020 as price
+		,t.patientinfo_022 as detailpayamt
+		from PATIENTINFO t
+		where t.health_record_id = #{cardno,jdbcType=VARCHAR}
+	</select>
+	<update id="insertAPIHPS" parameterType="com.das.consultation.entity.app.HPS_queryPayInfoInfo">
+
+	</update>
+	<!-- orgcode 医疗机构代码 cardtype 医疗卡类型 cardno 医疗卡号 出参 payinfo（每个payInfo可能有多个detail） 
+		hispayorderno 支付订单号 hispaytotalamt 订单总金额 mzlsh 门诊流水号 hispayno 支付单据号 hispayamt 
+		支付总金额 selfpayamt 自费支付金额 socialpayamt 医保支付金额 paytype 费用类型 paystate 支付状态 creattime 
+		处方单时间 depname 科室名称 doctorname 医生姓名 mztype 是否医保结算 detail(多项) itemcodehis His项目代码 
+		itemcodeyb 医保项目代码 itemname 项目名称 std 规格 amt 数量 unit 数量单位 price 单价 detailpayamt 
+		应收价格 -->
+</mapper>
+
+
+
+

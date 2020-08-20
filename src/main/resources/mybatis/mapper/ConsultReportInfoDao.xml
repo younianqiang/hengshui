@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.xinyi.CltReportMapper">
+
+    <resultMap type="com.das.consultation.entity.xinyi.ConsultationReportInfo" id="ConsultReportInfoMap">
+        <result property="diseaseid" column="DISEASEID" jdbcType="VARCHAR"/>
+        <result property="icd10id" column="ICD10ID" jdbcType="VARCHAR"/>
+        <result property="primid" column="PRIMID" jdbcType="VARCHAR"/>
+        <result property="createoperator" column="CREATEOPERATOR" jdbcType="VARCHAR"/>
+        <result property="createtime" column="CREATETIME" jdbcType="OTHER"/>
+        <result property="diagnose" column="DIAGNOSE" jdbcType="VARCHAR"/>
+        <result property="epidemic" column="EPIDEMIC" jdbcType="VARCHAR"/>
+        <result property="flag" column="FLAG" jdbcType="VARCHAR"/>
+        <result property="modifiedtime" column="MODIFIEDTIME" jdbcType="OTHER"/>
+        <result property="modifier" column="MODIFIER" jdbcType="VARCHAR"/>
+        <result property="operatorid" column="OPERATORID" jdbcType="VARCHAR"/>
+        <result property="orgcode" column="ORGCODE" jdbcType="VARCHAR"/>
+        <result property="patientid" column="PATIENTID" jdbcType="VARCHAR"/>
+        <result property="reportdeptid" column="REPORTDEPTID" jdbcType="VARCHAR"/>
+        <result property="reportdeptname" column="REPORTDEPTNAME" jdbcType="VARCHAR"/>
+        <result property="reportdoc" column="REPORTDOC" jdbcType="VARCHAR"/>
+        <result property="reportfilename" column="REPORTFILENAME" jdbcType="VARCHAR"/>
+        <result property="reporthopitalid" column="REPORTHOPITALID" jdbcType="VARCHAR"/>
+        <result property="reporthopitalname" column="REPORTHOPITALNAME" jdbcType="VARCHAR"/>
+        <result property="reportusername" column="REPORTUSERNAME" jdbcType="VARCHAR"/>
+        <result property="suggestion" column="SUGGESTION" jdbcType="VARCHAR"/>
+        <result property="treatment" column="TREATMENT" jdbcType="VARCHAR"/>
+        <result property="triamain" column="TRIAMAIN" jdbcType="VARCHAR"/>
+        <result property="uploadtime" column="UPLOADTIME" jdbcType="OTHER"/>
+    </resultMap>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="primid" useGeneratedKeys="true">
+        insert into JCYL.CONSULT_REPORT_INFO(PRIMID,ICD10ID,DISEASEID,CREATEOPERATOR, CREATETIME,
+        DIAGNOSE, EPIDEMIC, FLAG, MODIFIEDTIME, MODIFIER, OPERATORID, ORGCODE, PATIENTID, REPORTDEPTID,
+        REPORTDEPTNAME, REPORTDOC, REPORTFILENAME, REPORTHOPITALID, REPORTHOPITALNAME, REPORTUSERNAME, SUGGESTION,
+        TREATMENT, TRIAMAIN, UPLOADTIME)
+        values (#{primid},#{icd10id},#{diseaseid},#{createoperator,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE},
+         #{diagnose,jdbcType=VARCHAR}, #{epidemic,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=DATE},
+         #{modifier,jdbcType=VARCHAR}, #{operatorid,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR},
+        #{reportdeptid,jdbcType=VARCHAR}, #{reportdeptname,jdbcType=VARCHAR}, #{reportdoc,jdbcType=VARCHAR}, #{reportfilename,jdbcType=VARCHAR},
+         #{reporthopitalid,jdbcType=VARCHAR}, #{reporthopitalname,jdbcType=VARCHAR}, #{reportusername,jdbcType=VARCHAR}, #{suggestion,jdbcType=VARCHAR},
+          #{treatment,jdbcType=VARCHAR}, #{triamain,jdbcType=VARCHAR}, #{uploadtime,jdbcType=DATE})
+    </insert>
+
+
+</mapper>

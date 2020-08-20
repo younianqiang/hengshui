@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.app.HPS_takeNoSearchMapper">
+	<!-- 定义缓存 一般是一级缓存，如果用同一个sqlsession 那么相同查询直接会从缓存中查找 <cache size="1024" flushInterval="60000" 
+		eviction="LRU" readOnly="false"></cache> -->
+
+	<!-- 患者队列查询 -->
+	<select id="findAPIHPS" resultType="com.das.consultation.entity.app.HPS_takeNoSearchInfo"
+		parameterType="String">
+		<!-- select t.queuenum as queuenum, t.hasno as hasno , t.averagetime as 
+			averagetime from XXXXX t where t.orgcode = #{orgcode,jdbcType=VARCHAR} and t.appid = #{appid,jdbcType=VARCHAR} 
+			<if test="depid != null and depid !=''">and t.depid = #{depid,jdbcType=VARCHAR}</if> <if test="doctorid 
+			!= null and doctorid !=''">and t.doctorid = #{doctorid,jdbcType=VARCHAR}</if> <if test="endtime 
+			!= null and endtime !=''">and t.endtime = #{endtime,jdbcType=VARCHAR}</if> <if test="queueno 
+			!= null and queueno !=''">and t.queueno = #{queueno,jdbcType=VARCHAR}</if> -->
+
+		select
+		t.health_record_id as queuenum,
+		t.name as hasno,
+		t.health_record_no as averagetime
+		from
+		PATIENTINFO
+		t where
+		t.health_record_id = #{orgcode,jdbcType=VARCHAR}
+	</select>
+	<update id="insertAPIHPS" parameterType="com.das.consultation.entity.app.HPS_takeNoSearchInfo">
+		update XXXX
+		set
+		orgcode=#{orgcode,jdbcType=VARCHAR}
+		<if test="depid !=null and depid !=''">,depid= #{depid,jdbcType=VARCHAR}    </if>
+		<if test="doctorid  !=null and doctorid  !=''">,doctorid = #{doctorid,jdbcType=VARCHAR}     </if>
+		<if test="endtime !=null and endtime !=''">,endtime=#{endtime,jdbcType=VARCHAR}   </if>
+		<if test="queueno  !=null and queueno  !=''">,queueno = #{queueno,jdbcType=VARCHAR}     </if>
+		<if test="queuenum !=null and queuenum !=''">,queuenum = #{queuenum,jdbcType=VARCHAR} </if>
+		<if test="hasno !=null and hasno !=''">,hasno =#{hasno,jdbcType=VARCHAR}    </if>
+		<if test="averagetime !=null and averagetime !=''">,averagetime = #{averagetime,jdbcType=VARCHAR} </if>
+		where orgcode=#{orgcode,jdbcType=VARCHAR} and appid = #{appid,jdbcType=VARCHAR}
+	</update>
+	<!-- //orgcode	医疗机构代码
+//appid	预约单号
+//depid	科室ID
+//doctorid	医生ID
+//endtime	截至时间
+//queueno	队列号
+////////////////////////////////
+//queuenum	当前队列人数
+//hasno	是否还有余号
+//averagetime	看诊病人的平均时间 -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+     
+     
+
+
+
+
+
+
+
+        
+        
+
+

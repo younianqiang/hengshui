@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.SigningFeeMapper">
+
+    <resultMap type="com.das.consultation.entity.SigningFee" id="SigningFeeMap">
+        <result property="lastUpdateDtime" column="LAST_UPDATE_DTIME" jdbcType="OTHER"/>
+        <result property="orgCode" column="ORG_CODE" jdbcType="VARCHAR"/>
+        <result property="patientId" column="PATIENT_ID" jdbcType="VARCHAR"/>
+        <result property="healthRecordNo" column="HEALTH_RECORD_NO" jdbcType="VARCHAR"/>
+        <result property="medicalInsuranceType" column="MEDICAL_INSURANCE_TYPE" jdbcType="VARCHAR"/>
+        <result property="reimbursementType" column="REIMBURSEMENT_TYPE" jdbcType="VARCHAR"/>
+        <result property="signingAmount" column="SIGNING_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="publicHealthAmount" column="PUBLIC_HEALTH_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="servicePackRecAmount" column="SERVICE_PACK_REC_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="servicePackRedAmount" column="SERVICE_PACK_RED_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="servicePackMedAmount" column="SERVICE_PACK_MED_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="servicePackSlefAmount" column="SERVICE_PACK_SLEF_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="collectedAmount" column="COLLECTED_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="chargeFlag" column="CHARGE_FLAG" jdbcType="VARCHAR"/>
+        <result property="chargeTime" column="CHARGE_TIME" jdbcType="VARCHAR"/>
+        <result property="chargeAmount" column="CHARGE_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="depositAmount" column="DEPOSIT_AMOUNT" jdbcType="VARCHAR"/>
+        <result property="payee" column="PAYEE" jdbcType="VARCHAR"/>
+        <result property="cashRegister" column="CASH_REGISTER" jdbcType="VARCHAR"/>
+        <result property="reckonerCode" column="RECKONER_CODE" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SigningFeeMap">
+        select
+          LAST_UPDATE_DTIME, ORG_CODE, PATIENT_ID, HEALTH_RECORD_NO, MEDICAL_INSURANCE_TYPE, REIMBURSEMENT_TYPE, SIGNING_AMOUNT, PUBLIC_HEALTH_AMOUNT, SERVICE_PACK_REC_AMOUNT, SERVICE_PACK_RED_AMOUNT, SERVICE_PACK_MED_AMOUNT, SERVICE_PACK_SLEF_AMOUNT, COLLECTED_AMOUNT, CHARGE_FLAG, CHARGE_TIME, CHARGE_AMOUNT, DEPOSIT_AMOUNT, PAYEE, CASH_REGISTER, RECKONER_CODE
+        from JTYS.SIGNING_FEE
+        where ORG_CODE = #{orgCode}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SigningFeeMap">
+        select
+          LAST_UPDATE_DTIME, ORG_CODE, PATIENT_ID, HEALTH_RECORD_NO, MEDICAL_INSURANCE_TYPE, REIMBURSEMENT_TYPE, SIGNING_AMOUNT, PUBLIC_HEALTH_AMOUNT, SERVICE_PACK_REC_AMOUNT, SERVICE_PACK_RED_AMOUNT, SERVICE_PACK_MED_AMOUNT, SERVICE_PACK_SLEF_AMOUNT, COLLECTED_AMOUNT, CHARGE_FLAG, CHARGE_TIME, CHARGE_AMOUNT, DEPOSIT_AMOUNT, PAYEE, CASH_REGISTER, RECKONER_CODE
+        from JTYS.SIGNING_FEE
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SigningFeeMap">
+        select
+          LAST_UPDATE_DTIME, ORG_CODE, PATIENT_ID, HEALTH_RECORD_NO, MEDICAL_INSURANCE_TYPE, REIMBURSEMENT_TYPE, SIGNING_AMOUNT, PUBLIC_HEALTH_AMOUNT, SERVICE_PACK_REC_AMOUNT, SERVICE_PACK_RED_AMOUNT, SERVICE_PACK_MED_AMOUNT, SERVICE_PACK_SLEF_AMOUNT, COLLECTED_AMOUNT, CHARGE_FLAG, CHARGE_TIME, CHARGE_AMOUNT, DEPOSIT_AMOUNT, PAYEE, CASH_REGISTER, RECKONER_CODE
+        from JTYS.SIGNING_FEE
+        <where>
+            <if test="lastUpdateDtime != null">
+                and LAST_UPDATE_DTIME = #{lastUpdateDtime}
+            </if>
+            <if test="orgCode != null and orgCode != ''">
+                and ORG_CODE = #{orgCode}
+            </if>
+            <if test="patientId != null and patientId != ''">
+                and PATIENT_ID = #{patientId}
+            </if>
+            <if test="healthRecordNo != null and healthRecordNo != ''">
+                and HEALTH_RECORD_NO = #{healthRecordNo}
+            </if>
+            <if test="medicalInsuranceType != null and medicalInsuranceType != ''">
+                and MEDICAL_INSURANCE_TYPE = #{medicalInsuranceType}
+            </if>
+            <if test="reimbursementType != null and reimbursementType != ''">
+                and REIMBURSEMENT_TYPE = #{reimbursementType}
+            </if>
+            <if test="signingAmount != null and signingAmount != ''">
+                and SIGNING_AMOUNT = #{signingAmount}
+            </if>
+            <if test="publicHealthAmount != null and publicHealthAmount != ''">
+                and PUBLIC_HEALTH_AMOUNT = #{publicHealthAmount}
+            </if>
+            <if test="servicePackRecAmount != null and servicePackRecAmount != ''">
+                and SERVICE_PACK_REC_AMOUNT = #{servicePackRecAmount}
+            </if>
+            <if test="servicePackRedAmount != null and servicePackRedAmount != ''">
+                and SERVICE_PACK_RED_AMOUNT = #{servicePackRedAmount}
+            </if>
+            <if test="servicePackMedAmount != null and servicePackMedAmount != ''">
+                and SERVICE_PACK_MED_AMOUNT = #{servicePackMedAmount}
+            </if>
+            <if test="servicePackSlefAmount != null and servicePackSlefAmount != ''">
+                and SERVICE_PACK_SLEF_AMOUNT = #{servicePackSlefAmount}
+            </if>
+            <if test="collectedAmount != null and collectedAmount != ''">
+                and COLLECTED_AMOUNT = #{collectedAmount}
+            </if>
+            <if test="chargeFlag != null and chargeFlag != ''">
+                and CHARGE_FLAG = #{chargeFlag}
+            </if>
+            <if test="chargeTime != null and chargeTime != ''">
+                and CHARGE_TIME = #{chargeTime}
+            </if>
+            <if test="chargeAmount != null and chargeAmount != ''">
+                and CHARGE_AMOUNT = #{chargeAmount}
+            </if>
+            <if test="depositAmount != null and depositAmount != ''">
+                and DEPOSIT_AMOUNT = #{depositAmount}
+            </if>
+            <if test="payee != null and payee != ''">
+                and PAYEE = #{payee}
+            </if>
+            <if test="cashRegister != null and cashRegister != ''">
+                and CASH_REGISTER = #{cashRegister}
+            </if>
+            <if test="reckonerCode != null and reckonerCode != ''">
+                and RECKONER_CODE = #{reckonerCode}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="orgCode" useGeneratedKeys="true">
+        insert into JTYS.SIGNING_FEE(LAST_UPDATE_DTIME, HEALTH_RECORD_NO, MEDICAL_INSURANCE_TYPE, REIMBURSEMENT_TYPE, SIGNING_AMOUNT, PUBLIC_HEALTH_AMOUNT, SERVICE_PACK_REC_AMOUNT, SERVICE_PACK_RED_AMOUNT, SERVICE_PACK_MED_AMOUNT, SERVICE_PACK_SLEF_AMOUNT, COLLECTED_AMOUNT, CHARGE_FLAG, CHARGE_TIME, CHARGE_AMOUNT, DEPOSIT_AMOUNT, PAYEE, CASH_REGISTER, RECKONER_CODE)
+        values (#{lastUpdateDtime}, #{healthRecordNo}, #{medicalInsuranceType}, #{reimbursementType}, #{signingAmount}, #{publicHealthAmount}, #{servicePackRecAmount}, #{servicePackRedAmount}, #{servicePackMedAmount}, #{servicePackSlefAmount}, #{collectedAmount}, #{chargeFlag}, #{chargeTime}, #{chargeAmount}, #{depositAmount}, #{payee}, #{cashRegister}, #{reckonerCode})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update JTYS.SIGNING_FEE
+        <set>
+            <if test="lastUpdateDtime != null">
+                LAST_UPDATE_DTIME = #{lastUpdateDtime},
+            </if>
+            <if test="healthRecordNo != null and healthRecordNo != ''">
+                HEALTH_RECORD_NO = #{healthRecordNo},
+            </if>
+            <if test="medicalInsuranceType != null and medicalInsuranceType != ''">
+                MEDICAL_INSURANCE_TYPE = #{medicalInsuranceType},
+            </if>
+            <if test="reimbursementType != null and reimbursementType != ''">
+                REIMBURSEMENT_TYPE = #{reimbursementType},
+            </if>
+            <if test="signingAmount != null and signingAmount != ''">
+                SIGNING_AMOUNT = #{signingAmount},
+            </if>
+            <if test="publicHealthAmount != null and publicHealthAmount != ''">
+                PUBLIC_HEALTH_AMOUNT = #{publicHealthAmount},
+            </if>
+            <if test="servicePackRecAmount != null and servicePackRecAmount != ''">
+                SERVICE_PACK_REC_AMOUNT = #{servicePackRecAmount},
+            </if>
+            <if test="servicePackRedAmount != null and servicePackRedAmount != ''">
+                SERVICE_PACK_RED_AMOUNT = #{servicePackRedAmount},
+            </if>
+            <if test="servicePackMedAmount != null and servicePackMedAmount != ''">
+                SERVICE_PACK_MED_AMOUNT = #{servicePackMedAmount},
+            </if>
+            <if test="servicePackSlefAmount != null and servicePackSlefAmount != ''">
+                SERVICE_PACK_SLEF_AMOUNT = #{servicePackSlefAmount},
+            </if>
+            <if test="collectedAmount != null and collectedAmount != ''">
+                COLLECTED_AMOUNT = #{collectedAmount},
+            </if>
+            <if test="chargeFlag != null and chargeFlag != ''">
+                CHARGE_FLAG = #{chargeFlag},
+            </if>
+            <if test="chargeTime != null and chargeTime != ''">
+                CHARGE_TIME = #{chargeTime},
+            </if>
+            <if test="chargeAmount != null and chargeAmount != ''">
+                CHARGE_AMOUNT = #{chargeAmount},
+            </if>
+            <if test="depositAmount != null and depositAmount != ''">
+                DEPOSIT_AMOUNT = #{depositAmount},
+            </if>
+            <if test="payee != null and payee != ''">
+                PAYEE = #{payee},
+            </if>
+            <if test="cashRegister != null and cashRegister != ''">
+                CASH_REGISTER = #{cashRegister},
+            </if>
+            <if test="reckonerCode != null and reckonerCode != ''">
+                RECKONER_CODE = #{reckonerCode},
+            </if>
+        </set>
+        where ORG_CODE = #{orgCode}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from JTYS.SIGNING_FEE where ORG_CODE = #{orgCode}
+    </delete>
+
+</mapper>

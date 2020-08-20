@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.common.BaseInfoMapper">
+
+    <resultMap type="com.das.consultation.entity.common.BaseInfo" id="BaseInfoMap">
+        <result property="patientid" column="PATIENT_ID" jdbcType="VARCHAR"/>
+        <result property="patientname" column="NAME" jdbcType="VARCHAR"/>
+        <result property="birthdate" column="BIRTH_DATE" jdbcType="DATE"/>
+        <result property="cardid" column="ID_NO" jdbcType="VARCHAR"/>
+        <result property="sex" column="SEX_CODE" jdbcType="VARCHAR"/>
+        <result property="nation" column="NATIONALITY_CODE" jdbcType="VARCHAR"/>
+        <result property="orgcode" column="ORG_CODE" jdbcType="VARCHAR"/>
+        <result property="orgname" column="ORG_CODE" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getBaseInfoById" resultMap="BaseInfoMap">
+        select
+        PATIENT_ID,NAME,BIRTH_DATE,ID_NO,SEX_CODE,NATIONALITY_CODE,ORG_CODE
+        from JCYL.BASEINFO
+        where ORG_CODE = #{orgCode} and  PATIENT_ID = #{patientId}
+    </select>
+
+
+</mapper>

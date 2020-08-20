@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.das.consultation.mapper.xinyi.RemoteCltMapper">
+
+    <resultMap type="com.das.consultation.entity.xinyi.RemoteCltInfo" id="RemoteConsultInfoMap">
+        <result property="orgCode" column="ORG_CODE" jdbcType="VARCHAR"/>
+        <result property="patientId" column="PATIENT_ID" jdbcType="VARCHAR"/>
+        <result property="applydeptid" column="APPLYDEPTID" jdbcType="VARCHAR"/>
+        <result property="applydocid" column="APPLYDOCID" jdbcType="VARCHAR"/>
+        <result property="applydoctel" column="APPLYDOCTEL" jdbcType="VARCHAR"/>
+        <result property="applyhospid" column="APPLYHOSPID" jdbcType="VARCHAR"/>
+        <result property="applysubdeptid" column="APPLYSUBDEPTID" jdbcType="VARCHAR"/>
+        <result property="applytime" column="APPLYTIME" jdbcType="OTHER"/>
+        <result property="applytype" column="APPLYTYPE" jdbcType="VARCHAR"/>
+        <result property="cmdata" column="CMDATA" jdbcType="VARCHAR"/>
+        <result property="conferenceflag" column="CONFERENCEFLAG" jdbcType="VARCHAR"/>
+        <result property="consampm" column="CONSAMPM" jdbcType="OTHER"/>
+        <result property="consattribute" column="CONSATTRIBUTE" jdbcType="VARCHAR"/>
+        <result property="consend" column="CONSEND" jdbcType="VARCHAR"/>
+        <result property="consid" column="CONSID" jdbcType="VARCHAR"/>
+        <result property="consmode" column="CONSMODE" jdbcType="VARCHAR"/>
+        <result property="consstart" column="CONSSTART" jdbcType="OTHER"/>
+        <result property="constype" column="CONSTYPE" jdbcType="VARCHAR"/>
+        <result property="consultationid" column="CONSULTATIONID" jdbcType="VARCHAR"/>
+        <result property="createoperator" column="CREATEOPERATOR" jdbcType="VARCHAR"/>
+        <result property="createtime" column="CREATETIME" jdbcType="OTHER"/>
+        <result property="flag" column="FLAG" jdbcType="VARCHAR"/>
+        <result property="fundfeetype" column="FUNDFEETYPE" jdbcType="VARCHAR"/>
+        <result property="hangupnode" column="HANGUPNODE" jdbcType="VARCHAR"/>
+        <result property="hospadminname" column="HOSPADMINNAME" jdbcType="VARCHAR"/>
+        <result property="hospadmintel" column="HOSPADMINTEL" jdbcType="VARCHAR"/>
+        <result property="infotype" column="INFOTYPE" jdbcType="VARCHAR"/>
+        <result property="modifiedtime" column="MODIFIEDTIME" jdbcType="OTHER"/>
+        <result property="modifier" column="MODIFIER" jdbcType="VARCHAR"/>
+        <result property="primallocate" column="PRIMALLOCATE" jdbcType="VARCHAR"/>
+        <result property="primappointed" column="PRIMAPPOINTED" jdbcType="VARCHAR"/>
+        <result property="primemergency" column="PRIMEMERGENCY" jdbcType="VARCHAR"/>
+        <result property="primexpertteam" column="PRIMEXPERTTEAM" jdbcType="VARCHAR"/>
+        <result property="primfollowup" column="PRIMFOLLOWUP" jdbcType="VARCHAR"/>
+        <result property="primid" column="PRIMID" jdbcType="VARCHAR"/>
+        <result property="priminteractive" column="PRIMINTERACTIVE" jdbcType="VARCHAR"/>
+        <result property="primmdt" column="PRIMMDT" jdbcType="VARCHAR"/>
+        <result property="primno" column="PRIMNO" jdbcType="VARCHAR"/>
+        <result property="primreservation" column="PRIMRESERVATION" jdbcType="VARCHAR"/>
+        <result property="primreservedept" column="PRIMRESERVEDEPT" jdbcType="VARCHAR"/>
+        <result property="primreservespec" column="PRIMRESERVESPEC" jdbcType="VARCHAR"/>
+        <result property="primstatus" column="PRIMSTATUS" jdbcType="VARCHAR"/>
+        <result property="rejectflag" column="REJECTFLAG" jdbcType="VARCHAR"/>
+        <result property="reportflag" column="REPORTFLAG" jdbcType="VARCHAR"/>
+        <result property="requesttype" column="REQUESTTYPE" jdbcType="VARCHAR"/>
+        <result property="selfdept" column="SELFDEPT" jdbcType="VARCHAR"/>
+        <result property="selfdoc" column="SELFDOC" jdbcType="VARCHAR"/>
+        <result property="selfdoctel" column="SELFDOCTEL" jdbcType="VARCHAR"/>
+        <result property="selfhosp" column="SELFHOSP" jdbcType="VARCHAR"/>
+        <result property="sendstatus" column="SENDSTATUS" jdbcType="VARCHAR"/>
+        <result property="uniteflag" column="UNITEFLAG" jdbcType="VARCHAR"/>
+        <result property="uploadtime" column="UPLOADTIME" jdbcType="OTHER"/>
+    </resultMap>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="primid" useGeneratedKeys="true">
+        insert into REMOTE_CONSULT_INFO(PRIMID,ORG_CODE,PATIENT_ID,APPLYDEPTID, APPLYDOCID, APPLYDOCTEL, APPLYHOSPID,
+        APPLYSUBDEPTID, APPLYTIME, APPLYTYPE, CMDATA, CONFERENCEFLAG, CONSAMPM, CONSATTRIBUTE, CONSEND, CONSID,
+        CONSMODE, CONSSTART, CONSTYPE, CONSULTATIONID, CREATEOPERATOR, CREATETIME, FLAG, FUNDFEETYPE, HANGUPNODE, HOSPADMINNAME,
+        HOSPADMINTEL, INFOTYPE, MODIFIEDTIME, MODIFIER, PRIMALLOCATE, PRIMAPPOINTED, PRIMEMERGENCY, PRIMEXPERTTEAM, PRIMFOLLOWUP,
+        PRIMINTERACTIVE, PRIMMDT, PRIMNO, PRIMRESERVATION, PRIMRESERVEDEPT, PRIMRESERVESPEC, PRIMSTATUS, REJECTFLAG, REPORTFLAG,
+         REQUESTTYPE, SELFDEPT, SELFDOC, SELFDOCTEL, SELFHOSP, SENDSTATUS, UNITEFLAG, UPLOADTIME)
+        values (#{primid},#{orgCode},#{patientId},#{applydeptid,jdbcType=VARCHAR}, #{applydocid, jdbcType=VARCHAR},
+        #{applydoctel, jdbcType=VARCHAR}, #{applyhospid, jdbcType=VARCHAR}, #{applysubdeptid, jdbcType=VARCHAR},
+        #{applytime, jdbcType=DATE}, #{applytype, jdbcType=VARCHAR}, #{cmdata, jdbcType=VARCHAR}, #{conferenceflag,
+         jdbcType=VARCHAR}, #{consampm, jdbcType=DATE}, #{consattribute,jdbcType=VARCHAR}, #{consend,jdbcType=VARCHAR}, #{consid,jdbcType=VARCHAR}, #{consmode,jdbcType=VARCHAR},
+         #{consstart, jdbcType=DATE}, #{constype, jdbcType=VARCHAR}, #{consultationid, jdbcType=VARCHAR},
+         #{createoperator, jdbcType=VARCHAR}, #{createtime, jdbcType=DATE}, #{flag, jdbcType=VARCHAR},
+         #{fundfeetype, jdbcType=VARCHAR}, #{hangupnode, jdbcType=VARCHAR}, #{hospadminname, jdbcType=VARCHAR},
+          #{hospadmintel, jdbcType=VARCHAR}, #{infotype, jdbcType=VARCHAR}, #{modifiedtime}, #{modifier, jdbcType=VARCHAR},
+           #{primallocate, jdbcType=VARCHAR}, #{primappointed, jdbcType=VARCHAR}, #{primemergency, jdbcType=VARCHAR},
+           #{primexpertteam,jdbcType=VARCHAR}, #{primfollowup, jdbcType=VARCHAR}, #{priminteractive, jdbcType=VARCHAR}, #{primmdt, jdbcType=VARCHAR}, #{primno, jdbcType=VARCHAR},
+            #{primreservation, jdbcType=VARCHAR}, #{primreservedept, jdbcType=VARCHAR},
+            #{primreservespec,jdbcType=VARCHAR}, #{primstatus,jdbcType=VARCHAR}, #{rejectflag,jdbcType=VARCHAR}, #{reportflag,jdbcType=VARCHAR},
+            #{requesttype,jdbcType=VARCHAR}, #{selfdept,jdbcType=VARCHAR}, #{selfdoc,jdbcType=VARCHAR}, #{selfdoctel,jdbcType=VARCHAR},
+             #{selfhosp, jdbcType=VARCHAR}, #{sendstatus, jdbcType=VARCHAR}, #{uniteflag, jdbcType=VARCHAR}, #{uploadtime})
+    </insert>
+
+
+</mapper>
