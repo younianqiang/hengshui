@@ -3,14 +3,14 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: oracle.jdbc.OracleDriver
     druid:
-      jcyl: #基础医疗
-        url: jdbc:oracle:thin:@192.168.2.65:1521/hengshui
-        username: jcyl
-        password: juyaPassw0d
-      jtys: #家庭医生
-        url: jdbc:oracle:thin:@192.168.2.65:1521/hengshui
-        username: jtys
-        password: juyaPassw0d
+      jcyl: #
+        url: jdbc:oracle:thin:@
+        username: 
+        password: 
+      jtys: #
+        url: jdbc:oracle:thin:@
+        username: 
+        password: 
       initial-size: 10
       max-active: 100
       min-idle: 10
