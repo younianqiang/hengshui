@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.das.springboot.hengshui.mapper.app.AppMapper">
-	<resultMap id="BaseResultMap" type="com.das.springboot.hengshui.domain.PersonalInfo">
+<mapper namespace="com.das.consultation.mapper.app.AppMapper">
+	
+	<!-- 个人信息 -->
+	<resultMap id="PersionResultMap" type="com.das.consultation.entity.app.PersonalInfo">
 		<result column="ORG_CODE" property="orgcode" />
-		<!-- empi address  idadress medicalpaytype -->
+		<!-- empi   -->
 		<result column="NAME" property="patientname" /> 
 		<result column="ID_TYPE_CODE" property="idcardtype" />
 		<result column="ID_NO" property="iccardno" />
@@ -20,18 +22,88 @@
 		<result column="RH_CODE" property="RH" />
 		<result column="CONTACT_NAME" property="familyname" />
 		<result column="CONTACT_TEL_NO" property="familytelephone" />
+		<result column="ADDRESS" property="address" />
+		<result column="ADDRESS" property="idadress" />
+		<result column="PAY_WAY_CODE" property="medicalpaytype" />
 	</resultMap>		
 				
-	<!-- 查询个人信息 -->			
-	<select id="HPS_PersonalInformation" parameterType="String" resultMap="BaseResultMap">
-		select 
-			ORG_CODE,NAME,ID_TYPE_CODE,ID_NO,SEX_CODE,BIRTH_DATE,TEL_NO,NATIONALITY_CODE,MARRIAGE_CODE,
-			RESIDENCE_MARK,OCCUPATION_CODE,EDUCATION_CODE,EMPLOYER_NAME,ABO_CODE,RH_CODE,CONTACT_NAME,CONTACT_TEL_NO
-		from BASEINFO  
-		where 
-			ORG_CODE = #{orgcode,jdbcType=VARCHAR}
-		and ID_NO = #{iccardno,jdbcType=VARCHAR}
-		and ID_TYPE_CODE = '01'
+	<!-- 医疗病史  字段取值时出现标准不唯一，后续会出现变更-->			
+	<resultMap id="HealthResultMap" type="com.das.consultation.entity.app.HealthyHistory">
+		<result column="ORG_CODE" property="orgcode" />
+		<!-- empi   -->
+		<result column="NAME" property="patientname" /> 
+		<result column="ID_TYPE_CODE" property="idcardtype" />
+		<result column="ID_NO" property="iccardno" />
+		<result column="DRUG_ALLERGY_MARK" property="drugallergy" />
+		<result column="GENETIC_DISEASE_HISTORY" property="genetichistory" />
+		<!-- 暴露史 -->
+<!-- 		<result column="TEL_NO" property="exposurehistory" /> -->
+		<result column="DISABILITY_MARK" property="deformity" />
+		<result column="OP_HISTORY_MARK" property="operation" />
+		<result column="TRAUMA_HISTORY_MARK" property="trauma" />
+		<result column="BLOOD_TRANSF_MARK" property="transfusion" />
+		<!-- 既往疾病 -->
+<!-- 		<result column="OCCUPATION_CODE" property="disease" /> -->
+		<result column="father" property="father" />
+		<result column="mother" property="mother" />
+		<result column="brother" property="brother" />
+		<result column="son" property="son" />
+	</resultMap>
+				
+	<!-- 查询个人信息  -->			
+	<select id="HPS_PersonalInformation" parameterType="String" resultMap="PersionResultMap">
+		SELECT
+			A.ORG_CODE,
+			A.NAME,
+			A.ID_TYPE_CODE,
+			A.ID_NO,
+			A.SEX_CODE,
+			A.BIRTH_DATE,
+			A.TEL_NO,
+			A.NATIONALITY_CODE,
+			A.MARRIAGE_CODE,
+			A.RESIDENCE_MARK,
+			A.OCCUPATION_CODE,
+			A.EDUCATION_CODE,
+			A.EMPLOYER_NAME,
+			A.ABO_CODE,
+			A.RH_CODE,
+			A.CONTACT_NAME,
+			A.CONTACT_TEL_NO,
+			B.ADDR_PROVINCE || B.ADDR_CITY || B.ADDR_COUNTY || B.ADDR_TOWN || B.ADDR_VILLAGE || B.ADDR_HOUSE_NO AS ADDRESS,
+			C.PAY_WAY_CODE 
+		FROM
+			BASEINFO A
+			LEFT JOIN BASEINFO_ADDRESS B ON A.ORG_CODE = B.ORG_CODE 
+			AND A.PATIENT_ID = B.PATIENT_ID
+			LEFT JOIN BASEINFO_PAYWAY C ON A.ORG_CODE = B.ORG_CODE 
+			AND A.PATIENT_ID = C.PATIENT_ID 
+		WHERE
+			A.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+			AND A.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
 	</select>
 	
+	<!-- 医疗病史查询 后续还需要完善取值 -->
+	<select id="HPS_HealthyHistory" parameterType="String" resultMap="HealthResultMap">
+		SELECT
+			A.ORG_CODE,
+			A.NAME,
+			A.ID_TYPE_CODE,
+			A.ID_NO,
+			A.DRUG_ALLERGY_MARK,
+			A.GENETIC_DISEASE_HISTORY,
+			A.DISABILITY_MARK,
+			A.OP_HISTORY_MARK,
+			A.TRAUMA_HISTORY_MARK,
+			A.BLOOD_TRANSF_MARK,
+			(SELECT FAMILY_DISEASE_CODE FROM 	BASEINFO_FAMHISTORY	WHERE  PATIENT_RELATION_CODE='5' and ORG_CODE = #{orgCode,jdbcType=VARCHAR} and PATIENT_ID = #{patientId,jdbcType=VARCHAR}) as father,
+			(SELECT FAMILY_DISEASE_CODE FROM 	BASEINFO_FAMHISTORY	WHERE  PATIENT_RELATION_CODE='5' and ORG_CODE = #{orgCode,jdbcType=VARCHAR} and PATIENT_ID = #{patientId,jdbcType=VARCHAR}) as mother,
+			(SELECT FAMILY_DISEASE_CODE FROM 	BASEINFO_FAMHISTORY	WHERE  PATIENT_RELATION_CODE='7' and ORG_CODE = #{orgCode,jdbcType=VARCHAR} and PATIENT_ID = #{patientId,jdbcType=VARCHAR}) as brother,
+			(SELECT FAMILY_DISEASE_CODE FROM 	BASEINFO_FAMHISTORY	WHERE  PATIENT_RELATION_CODE='2' and ORG_CODE = #{orgCode,jdbcType=VARCHAR} and PATIENT_ID = #{patientId,jdbcType=VARCHAR}) as son
+		FROM
+			BASEINFO A
+		WHERE
+			A.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+			AND A.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+	</select>
 </mapper>
